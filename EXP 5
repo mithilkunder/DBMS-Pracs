@@ -201,3 +201,125 @@ SELECT UCASE("EduCbA");
 
 Output:
 EDUCBA
+
+
+
+Syntax
+
+COUNT (*)  
+or  
+COUNT ([ALL|DISTINCT] expression)  
+
+Code:
+SELECT COUNT (*) FROM PRODUCT_MAST;  
+Output:
+10
+COUNT with WHERE
+SELECT COUNT(*)  FROM PRODUCT_MAST WHERE RATE>=20;  
+Output:
+7
+COUNT () with DISTINCT
+SELECT COUNT (DISTINCT COMPANY) FROM PRODUCT_MAST; 
+Output:
+3
+COUNT() with GROUP BY
+SELECT COMPANY, COUNT(*) FROM PRODUCT_MAST GROUP BY COMPANY; 
+Output:
+Com1		5
+Com2		3
+Com3		2
+COUNT () with HAVING
+SELECT COMPANY, COUNT (*) FROM PRODUCT_MAST GROUP BY COMPANY  
+HAVING COUNT (*)>2; 
+
+
+Output:
+Com1		5
+Com2		3
+
+SUM Function
+Sum function is used to calculate the sum of all selected columns. It works on numeric fields only.
+Syntax:
+
+SUM()  
+or  
+SUM( [ALL|DISTINCT] expression ) 
+
+Code:
+SELECT SUM(COST) FROM PRODUCT_MAST;
+
+
+Output:
+670
+SUM() with WHERE
+Code:
+SELECT SUM(COST) FROM PRODUCT_MAST WHERE QTY>3;  
+
+
+Output:
+320
+
+
+SUM() with GROUP BY
+Code:
+SELECT SUM(COST) FROM PRODUCT_MAST WHERE QTY>3  GROUP BY COMPANY;  
+
+
+Output:
+Com1		150
+Com2		170
+
+
+SUM() with HAVING
+Code:
+SELECT COMPANY, SUM(COST) FROM PRODUCT_MAST  
+GROUP BY COMPANY HAVING SUM(COST)>=170;  
+
+
+Output:
+Com1		335
+Com3		170
+
+
+
+AVG function
+The AVG function is used to calculate the average value of the numeric type. AVG function returns the average of all non-Null values.
+Syntax
+AVG()  
+or  
+AVG( [ALL|DISTINCT] expression )  
+
+
+Code:
+SELECT AVG(COST)  FROM PRODUCT_MAST;  
+Output:
+67.00
+
+
+MAX Function
+MAX function is used to find the maximum value of a certain column. This function determines the largest value of all selected values of a column.
+MAX()  
+or  
+MAX( [ALL|DISTINCT] expression )  
+
+
+Code:
+SELECT MAX(RATE)  FROM PRODUCT_MAST;
+Output:
+30
+
+
+MIN Function
+MIN function is used to find the minimum value of a certain column. This function determines the smallest value of all selected values of a column.
+Syntax
+MIN()  
+or  
+MIN( [ALL|DISTINCT] expression )  
+
+
+Code:
+SELECT MIN(RATE)  FROM PRODUCT_MAST;  
+Output:
+10
+
+
