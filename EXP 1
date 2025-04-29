@@ -1,0 +1,270 @@
+AIM: 
+Identify the case study and detail statement of problem. Design an Entity-Relationship (ER) / Extended Entity-Relationship (EER) Model.
+
+THEORY:
+
+Employee Management System ER Diagram and Database Design
+
+
+
+Employee Management System ER Diagram depicts the relationship between various entities. It can be thought of as a blueprint for project structure.
+What is Employee Management System?
+Employers can easily control labor costs and increase productivity by using an employee management system. These systems give managers information about their employees and help them plan and schedule work hours better.
+It is an application-based system developed with two applications: one for employers to handle employee information and another for employees to track their attendance. The second application is for companies to keep staff data. Every organization, public or private, makes use of an employee management system.
+Employee Management System Features:
+Employee Management: This feature plays a big role in the system because this gathers important information about the employees. This information was used to track their job performance and other important matters regarding the system. The system will also check the attendance of the employees.
+
+
+Manage Salaries and Bonuses: The salary and bonuses management will be done by the admin to track the wages and expenses of the establishment. This process will help them in updating the status of the employees in terms of giving the salaries and other matters regarding their employees.
+
+
+Manage Job Departments and Status: Its feature will manage and monitor the job status of every employee and then will calculate their salaries for the range of their labor or per month. This will also record all the expenses of the establishment and then save them to the database for future inventory purposes.
+
+
+Manage and Monitor Transaction Records: This is the process where the admin should keep track of every transaction made by their employees with the product or services offered to their customers. The system will also monitor their attendance and Leave to determine the range of their work and calculate their exact salary.
+
+
+Benefits of using an employee management system ERD
+The following benefits come from developing your staff management system utilizing the diagramming features offered:
+You will have quicker access to all the data because it will be saved in one location, whether it is about personnel, projects, or general business information.
+You’ll save time and stay organized if you have all the information in one location, which will make it simpler to concentrate on jobs that are more urgent.
+No matter where you are, you can view your template and collaborate with your team members online in real time.
+Create an employee management system ERD template that works for you and your department using the ERD model stencils.
+
+These tables below provide the complete database design details such as Field Name, student management system project, data types, and character lengths for Employee System.
+
+Table Name: Employee
+Field
+Description
+Type
+Length
+emp_ID (PK)
+Employee ID
+Int
+11
+fname
+Employee First Name
+Varchar
+255
+lname
+Employee Last Name
+Varchar
+255
+gender
+Employee Gender
+Int
+11
+age
+Employee Age
+Int
+11
+contact_add
+Contact Address
+Int
+11
+emp_email
+Employee Email
+Varchar
+255
+emp_pass
+Employee Password
+Varchar
+255
+
+
+Table Name: Users
+Field
+Description
+Type
+Length
+admin_ID (PK)
+Admin ID
+Int
+11
+fname
+Instructor First Name
+Varchar
+255
+lname
+Instructor Last Name
+Varchar
+255
+gender
+Instructor Gender
+Int
+11
+age
+Instructor Age
+Int
+11
+contact_add
+Contact Address
+Int
+11
+admin_email
+Admin Email
+Varchar
+255
+admin_pass
+Admin Password
+Varchar
+255
+
+
+
+Table Name: Job Department
+Field
+Description
+Type
+Length
+job_ID (PK)
+Job ID
+Int
+11
+job_dept
+Job Department
+Varchar
+30
+name
+Job Name
+Varchar
+30
+description
+Job Description
+Varchar
+30
+salary_range
+Salary Range
+Varchar
+30
+
+
+Table Name: Salary or Bonus
+Field
+Description
+Type
+Length
+salary_ID (PK)
+Salary ID
+Int
+11
+job_ID (FK)
+Job ID
+Int
+11
+amount
+Amount
+Int
+11
+annual
+Annual Expense
+Date
+
+
+bonus
+Bonus
+Date
+
+
+
+
+Table Name: Qualification
+Field
+Description
+Type
+Length
+qual_ID (PK)
+Qualification ID
+Int
+11
+emp_ID (FK)
+Employee ID
+Int
+11
+position
+Position of Application
+Varchar
+30
+requirements
+Requirements
+Varchar
+30
+date_in
+Date In
+Date
+
+
+
+
+
+
+
+Table Name: Payroll
+Field
+Description
+Type
+Length
+payroll_ID (PK)
+Payroll ID
+Int
+11
+emp_ID (FK)
+Employee ID
+Int
+11
+job_ID (FK)
+Job ID
+Int
+11
+salary_ID (FK)
+Salary ID
+Int
+11
+leave_ID (FK)
+Leave ID
+Int
+11
+date
+Date of Payroll Report
+Date
+
+
+report
+Report
+Text
+
+
+total amount
+Total Amount
+Int
+11
+
+
+Steps in building the ER Diagram for Employee Management System with Cardinality Ratio
+
+Step 1: Familiarize the ER Diagram Symbols and Cardinality
+
+Entity Relationship Diagram – shows the structure of data types in a project. It uses symbols to clarify its parts and relationships. Their symbols and applications must be familiarized before you build the ER Diagram.
+ER Diagram Symbols:
+Fields: Fields are the parts of a table that define the entity’s characteristics. 
+
+Keys technique is used to organize ER diagrams and assist users in modeling their databases to ensure that they are efficient. This is also used to connect different tables in a database.
+
+Primary Key identifies a single entity instance which means a unique attribute or set of attributes. 
+Foreign Key is produced when data attributes have one - many relationships with other entities.
+
+ER Diagram Cardinalities:
+The styling of a line and its termination demonstrates cardinality and ordinality. The greatest number of times an instance of one thing can be related to instances of another entity is referred to as cardinality. While Ordinality refers to the fewest number of times a single entity instance can be linked to another.
+
+
+Step 2: Determine the targeted users
+After the symbol familiarization, determine the targeted users. The targeted users will be the ones to use your project. For Employee Management System project, targeted users would be the company admin and employees. Ask the users about the common activities that they do when doing tasks in employee management. This information will help designer in proceeding with the next step.
+
+Step 3: Analyze the entities and their included attributes
+
+Analyzation is very important in creating ER diagram. It will help you understand the work of the diagram and avoid unwanted errors. The gathered information from the users is very useful in creating the diagram. Designer will evaluate the data and pick the useful ones. 
+
+
+Step 4: Plot the Entity Relationship Diagram
+
+To plot the ERD, designer will need the entities, their attributes, and relationships. He will base the data structure from the evaluated information to have the exact Entity Relationship Diagram.
