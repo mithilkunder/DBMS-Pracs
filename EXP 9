@@ -1,0 +1,205 @@
+MySQL Stored Procedure
+
+
+A procedure (often called a stored procedure) is a collection of pre-compiled SQL statements stored inside the database. It is a subroutine or a subprogram in the regular computing language. A procedure always contains a name, parameter lists, and SQL statements. We can invoke the procedures by using triggers, other procedures and applications such as Java, Python, PHP, etc. It was first introduced in MySQL version 5. Presently, it can be supported by almost all relational database systems.
+
+
+If the enterprise application considered, DBA always need to perform specific tasks such as database cleanup, processing payroll, and many more on the database regularly. Such tasks involve multiple SQL statements for executing each task. This process might easy if we group these tasks into a single task. We can fulfill this requirement in MySQL by creating a stored procedure in our database.
+
+
+A procedure is called a recursive stored procedure when it calls itself. Most database systems support recursive stored procedures. But, it is not supported well in MySQL.
+
+Stored Procedure Features
+
+
+Stored Procedure increases the performance of the applications. Once stored procedures are created, they are compiled and stored in the database.
+Stored procedure reduces the traffic between application and database server. Because the application has to send only the stored procedure's name and parameters instead of sending multiple SQL statements.
+Stored procedures are reusable and transparent to any applications.
+A procedure is always secure. The database administrator can grant permissions to applications that access stored procedures in the database without giving any permission on the database tables.
+
+
+Procedure Creation
+
+
+The following syntax is used for creating a stored procedure in MySQL. It can return one or more value through parameters or sometimes may not return at all. By default, a procedure is associated with our current database. But DBA can also create it into another database from the current database by specifying the name as database_name.procedure_name. 
+
+
+Syntax:
+
+DELIMITER &&  
+CREATE PROCEDURE procedure_name [[IN | OUT | INOUT] parameter_name datatype [, parameter datatype]) ]    
+BEGIN    
+Declaration_section    
+Executable_section    
+END &&  
+DELIMITER;  
+
+MySQL procedure parameter has one of three modes:
+
+
+IN parameter
+It is the default mode where parameter's value is always protected. It takes parameter as input. When DBA define it, the calling program has to pass an argument to the stored procedure.
+
+
+OUT parameters
+It is used to pass a parameter as output. Its value can be changed inside the stored procedure, and the changed (new) value is passed back to the calling program. It is noted that a procedure cannot access the OUT parameter's initial value when it starts.
+
+
+INOUT parameters
+It is a combination of IN and OUT parameters. It means the calling program can pass the argument, and the procedure can modify the INOUT parameter, and then passes the new value back to the calling program.
+
+DBA can use the CALL statement to call a stored procedure. This statement returns the values to its caller through its parameters (IN, OUT, or INOUT). 
+
+
+Syntax:
+CALL procedure_name (parameter(s))  
+
+-- create
+CREATE TABLE EMPLOYEE (
+  empId INTEGER PRIMARY KEY,
+  name TEXT NOT NULL,
+  dept TEXT NOT NULL
+);
+
+-- insert
+INSERT INTO EMPLOYEE VALUES (0001, 'Clark', 'Sales');
+INSERT INTO EMPLOYEE VALUES (0002, 'Dave', 'Accounting');
+INSERT INTO EMPLOYEE VALUES (0003, 'Ava', 'Sales');
+
+
+
+-- fetch using procedures
+DELIMITER &&  
+CREATE PROCEDURE get_dept_info()  
+BEGIN  
+    SELECT * FROM EMPLOYEE WHERE dept='Sales';  
+    SELECT COUNT(empId) AS Total_Employee FROM EMPLOYEE;    
+END &&  
+DELIMITER ; 
+call get_dept_info();
+
+
+IN parameter Example 1 (Integer Data)
+DELIMITER &&  
+CREATE PROCEDURE get_dept_info(IN var1 INTEGER)  
+BEGIN  
+    SELECT * FROM EMPLOYEE limit var1;  
+    SELECT COUNT(empId) AS Total_Employee FROM EMPLOYEE;    
+END &&
+DELIMITER ; 
+call get_dept_info(2);
+
+IN parameter Example 2 (Varchar Data)
+DELIMITER &&  
+CREATE PROCEDURE get_dept_info(IN var1 VARCHAR(10))  
+BEGIN  
+    SELECT * FROM EMPLOYEE where dept=var1;  
+    SELECT COUNT(empId) AS Total_Employee FROM EMPLOYEE;    
+END &&
+DELIMITER ; 
+call get_dept_info('Sales');
+
+
+OUT parameter Example (Integer Data)
+DELIMITER &&  
+CREATE PROCEDURE display_max_id (OUT highestid INTEGER)  
+BEGIN  
+    SELECT MAX(empId) INTO highestid FROM EMPLOYEE;   
+END &&
+DELIMITER ;
+
+CALL display_max_id(@M);
+SELECT @M as MaxID;
+
+
+
+OUT parameter Example (VARCHAR Data)
+CREATE PROCEDURE display_name (OUT ename VARCHAR(20))  
+BEGIN  
+    SELECT name INTO ename FROM EMPLOYEE where empId=0003;   
+END &&
+DELIMITER ;
+CALL display_name(@M);
+SELECT @M as EmpName;
+
+
+INOUT parameter Example (VARCHAR Data)
+
+DELIMITER &&  
+CREATE PROCEDURE display_id (INOUT emp VARCHAR(20))  
+BEGIN  
+    SELECT name INTO emp FROM EMPLOYEE where dept=emp;   
+END &&
+DELIMITER ;
+set @M='Accounting';
+CALL display_id(@M);
+SELECT @M as ENAME;
+
+
+
+Stored Procedure to find factorial of an integer number
+Delimiter &&
+CREATE PROCEDURE fact(IN x INTEGER)
+BEGIN
+DECLARE result INTEGER;
+DECLARE i INTEGER;
+SET result = 1;
+SET i = 1;
+WHILE i <= x DO
+SET result = result * i;
+SET i = i + 1;
+END WHILE;
+SELECT x AS Number, result as Factorial;
+END &&
+DELIMITER ;
+
+CALL fact(5);
+
+MySQL Stored Function
+A MySQL stored function is a set of SQL instructions/statements that perform a certain task and return a single value. Stored function can be considered as any regular function in programming languages such as C, C++ or Java. Stored Functions are somewhat similar to stored functions, such as both are used to execute a block of code / statements. However, there are multiple differences between them which are as follows-
+Stored functions can return only a single value.
+We can call a stored function from the SQL statement.
+Stored functions only have one type of parameter which is the IN. However, it is set to default and you can’t / don’t specify the input type.
+Stored functions cannot produce results set as stored procedures do
+
+Syntax:
+DELIMITER //
+CREATE FUNCTION function_name(
+  [  param1 type,
+    param2 type,… ]
+)
+RETURNS datatype
+[[NOT] DETERMINISTIC]
+BEGIN
+ -- statements
+END $$
+
+DELIMITER ;
+
+
+
+Where,
+DELIMITER – It changes the default operator which indicates the end of the statement.
+CREATE FUNCTION – It creates a stored function.
+function_name – You can give any name to the stored function which follows the naming rules in MySQL.
+param1, param2 – The names of parameters along with their datatypes.
+RETURNS datatype – It specifies the datatype of the return value.
+[NOT] DETERMINISTIC – You can specify if the function is deterministic or non-deterministic. The deterministic function always returns the same output when the same input is provided. On the other hand, the non-deterministic function always returns a different output when the same input is provided. By default, the non-deterministic is set if nothing is specified.
+BEGIN…END – You can write one or more valid SQL statements inside the BEGIN…END block. Inside the BEGIN…END block, you must specify at least one RETURN statement that returns a value to the calling program. As soon as the RETURN statement is executed, the function terminates immediately.
+
+DELIMITER //
+CREATE FUNCTION getDept(empId INTEGER) RETURNS VARCHAR(20) DETERMINISTIC
+BEGIN
+DECLARE edept VARCHAR(20);
+IF empId = 1 THEN
+SET edept="Sales";
+ELSEIF empId = 2 THEN
+SET edept="Accounting";
+ELSEIF empId = 3 THEN
+SET edept="Sales";
+END IF;
+RETURN (edept);
+END //
+DELIMITER ;
+Select getDept(3) as Department from EMPLOYEE
+
