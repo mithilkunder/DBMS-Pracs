@@ -1,0 +1,203 @@
+ASCII () - It gives you the ASCII value of a character.
+Code:
+SELECT ASCII ('t');
+Output:
+116
+
+CHAR_LENGTH () - It gives you the number of characters in the string.
+Code:
+SELECT CHAR_LENGTH ('world!');
+Output:
+6
+
+
+CONCAT () - It appends two strings to create the new single string, as shown in the example.
+Code:
+SELECT CONCAT ('educba', '.com') 
+Output:
+educba.com
+
+CONCAT_WS () -It appends two strings with a given symbol in between to concatenate them
+Code:
+SELECT CONCAT_WS ('_', 'educba', 'to', 'learn');
+Output:
+educba_to_learn
+
+FIND_IN_SET () - It finds out the index position of any symbol or character from the given set
+Code:
+SELECT FIND_IN_SET ('v', 'z, x, v, b, n, m');
+Output:
+3
+
+FORMAT () - It changes the format of the text from a string to any other format.
+Code:
+FORMAT ("0.254", "Percent");
+Output:
+‘25.40%’
+
+INSERT () - It helps you insert text, integer, float, or double into your database.
+Code:
+INSERT INTO mydb (name, age) VALUES (‘sdf’, 20);
+Output:
+Inserted successfully
+
+INSTR () - It gives you the first occurrence of the index of a character in the string.
+Code:
+INSTR('educba to learn', 'e');
+Output:
+1 // (the first occurrence of ‘e’)
+
+
+LCASE () - It will replace every character in the string in their lowercase letter.
+Code:
+LCASE("eduCBA.com To Learn");
+Output:
+educba.com to learn
+
+
+LEFT () - It is used to get the substring from the left of the string to the given index position.
+Code:
+SELECT LEFT('educba.com', 3);
+Output:
+edu
+
+
+LENGTH () - Gives you the length of the string.
+Code:
+LENGTH('educba.com');
+Output:
+10
+
+
+LOCATE () - It gives you the position of a substring in the given string.
+Code:
+SELECT LOCATE('cba', 'educba.com', 1);
+Output:
+4
+
+
+LOWER () - It converts every character in a string to lowercase from uppercase.
+Code:
+SELECT LOWER('EDUCBA.COM');
+Output:
+educba.com
+
+
+LPAD () - It adds left padding with the given symbol to make the string of a given size.
+Code:
+SELECT LPAD('yahoo', 7, '@');
+Output:
+@@yahoo
+
+
+LTRIM () - It trims the given characters/ blank spaces from the left of the string.
+Code:
+LTRIM('    yahoo');
+Output:
+yahoo
+
+
+MID () - It gives the substring from a given position to the number of characters in the string.
+Code:
+SELECT MID("educba.com", 3, 2);
+Output:
+uc
+
+
+POSITION () - It gives you the index position of the character in the string.
+Code:
+SELECT POSITION('u' IN 'educba.com');
+Output:
+3
+
+
+REPEAT () - It repeats the string to the number of times given.
+Code:
+SELECT REPEAT('educba  ', 2);
+Output:
+educba  educba
+
+
+REPLACE () - It returns a new string by removing the given string from the original.
+Code:
+REPLACE ('456yahoo456', '456');
+Output:
+yahoo
+
+
+REVERSE () - It reverses the characters in a string.
+Code:
+SELECT REVERSE('educba.com');
+Output:
+moc.abcuda
+
+
+RIGHT () - It is used to get the substring from the right of the string to the given index.
+Code:
+SELECT RIGHT('educba.com', 4);
+Output:
+.com
+
+
+RPAD () - It adds the right padding with the given symbol to make the string of the given size.
+Code:
+RPAD('educba', 9, '@');
+Output:
+‘educba@@@’
+
+
+RTRIM () - It trims the given characters / blank spaces from the right of the string.
+Code:
+SELECT RTRIM('educba            ');
+Output:
+educba
+
+
+SPACE () - It adds the number of spaces specified.
+Code:
+SELECT SPACE(6);
+
+
+Output:
+‘      ‘
+
+
+STRCMP () - 
+Matches two strings.
+If both the strings are the same, it gives 0.
+If the first is smaller than the second, then it gives -1.
+If the first is bigger than the second, then it gives 1.
+Code:
+SELECT STRCMP('zomato.com', 'educba.com');
+Output:
+1
+
+
+SUBSTR () - It returns a new substring from a given position to the number of characters.
+Code:
+SUBSTR('educba.com', 1, 4);
+Output:
+educ
+
+
+SUBSTRING () - It gives you the substring character from the given string.
+Code:
+SELECT SUBSTRING('eduCba.com', 4, 1);
+Output:
+‘C’
+
+
+SUBSTRING_INDEX () - It gives you the substring until it finds the given symbol.
+Code:
+SELECT SUBSTRING_INDEX( anillondhe' , 'l', 1);
+Output:
+ani
+
+
+UCASE () – It will replace every character in the string in their uppercase letter.
+Code:
+SELECT UCASE("EduCbA");
+
+
+Output:
+EDUCBA
