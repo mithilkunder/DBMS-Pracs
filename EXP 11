@@ -1,0 +1,187 @@
+JDBC stands for Java Database Connectivity. JDBC is a Java API to connect and execute the query with the database. It is a part of JavaSE (Java Standard Edition). JDBC API uses JDBC drivers to connect with the database. There are four types of JDBC drivers:
+JDBC-ODBC Bridge Driver,
+Native Driver,
+Network Protocol Driver, and
+Thin Driver
+
+
+
+API (Application programming interface) is a document that contains a description of all the features of a product or software. It represents classes and interfaces that software programs can follow to communicate with each other. An API can be created for applications, libraries, operating systems, etc. The current version of JDBC is 4.3. It is the stable release since 21st September, 2017. It is based on the X/Open SQL Call Level Interface. The java.sql package contains classes and interfaces for JDBC API. List of popular interfaces of JDBC API are given below:
+Driver interface
+Connection interface
+Statement interface
+PreparedStatement interface
+CallableStatement interface
+ResultSet interface
+ResultSetMetaData interface
+DatabaseMetaData interface
+RowSet interface
+List of popular classes of JDBC API are given below:
+DriverManager class
+Blob class
+Clob class
+Types class
+
+
+
+
+Before JDBC, ODBC API was the database API to connect and execute the query with the database. But, ODBC API uses ODBC driver which is written in C language (i.e. platform dependent and unsecured). That is why Java has defined its own API (JDBC API) that uses JDBC drivers (written in Java language).
+
+
+DBA can use JDBC API to handle database using Java program and can perform the following activities:
+Connect to the database
+Execute queries and update statements to the database
+Retrieve the result received from the database.
+
+JDBC Driver is a software component that enables java application to interact with the database. There are 4 types of JDBC drivers:
+JDBC-ODBC bridge driver
+Native-API driver (partially java driver)
+Network Protocol driver (fully java driver)
+Thin driver (fully java driver)
+JDBC-ODBC bridge driver
+
+   
+The JDBC-ODBC bridge driver uses ODBC driver to connect to the database. The JDBC-ODBC bridge driver converts JDBC method calls into the ODBC function calls. This is now discouraged because of thin driver. Oracle does not support the JDBC-ODBC Bridge from Java 8. Oracle recommends that you use JDBC drivers provided by the vendor of your database instead of the JDBC-ODBC Bridge.
+Advantages:
+Easy to use.
+Can be easily connected to any database.
+
+
+Disadvantages:
+Performance degraded because JDBC method call is converted into the ODBC function calls.
+The ODBC driver needs to be installed on the client machine.
+
+ Native-API driver
+
+
+
+The Native API driver uses the client-side libraries of the database. The driver converts JDBC method calls into native calls of the database API. It is not written entirely in java.
+Advantage:
+Performance upgraded than JDBC-ODBC bridge driver.
+Disadvantage:
+Needs to be installed on the each client machine.
+Vendor client library needs to be installed on client machine.
+Network Protocol driver
+The Network Protocol driver uses middleware (application server) that converts JDBC calls directly or indirectly into the vendor-specific database protocol. It is fully written in java.
+
+
+Advantage:
+No client side library is required because of application server that can perform many tasks like auditing, load balancing, logging etc.
+
+Disadvantages:
+Network support is required on client machine.
+Requires database-specific coding to be done in the middle tier.
+Maintenance of Network Protocol driver becomes costly because it requires database-specific coding to be done in the middle tier.
+Thin driver
+The thin driver converts JDBC calls directly into the vendor-specific database protocol. That is why it is known as thin driver. It is fully written in Java language.
+Advantage:
+Better performance than all other drivers.
+No software is required at client side or server side.
+Disadvantage:
+Drivers depend on the Database.
+
+
+
+
+There are 5 steps to connect any java application with the database using JDBC. 
+Register the Driver class
+Create connection
+Create statement
+Execute queries
+Close connection
+Register the driver class
+
+The forName() method of Class class is used to register the driver class. This method is used to dynamically load the driver class.
+Syntax of forName() method
+public static void forName(String className)throws ClassNotFoundException
+Java program is loading oracle driver to establish database connection.
+Class.forName("oracle.jdbc.driver.OracleDriver");  
+Create the connection object
+The getConnection() method of DriverManager class is used to establish connection with the database.
+Syntax of getConnection() method
+1) public static Connection getConnection(String url)throws SQLException  
+2) public static Connection getConnection(String url,String name,String password)  
+throws SQLException  
+Example to establish connection with the Oracle database
+Connection con=DriverManager.getConnection
+("jdbc:oracle:thin:@localhost:1521:xe","system","password");  
+Create the Statement object
+The createStatement() method of Connection interface is used to create statement. The object of statement is responsible to execute queries with the database.
+Syntax of createStatement() method
+public Statement createStatement()throws SQLException  
+Example to create the statement object
+Statement stmt=con.createStatement();  
+Execute the query
+The executeQuery() method of Statement interface is used to execute queries to the database. This method returns the object of ResultSet that can be used to get all the records of a table.
+Syntax of executeQuery() method
+public ResultSet executeQuery(String sql)throws SQLException  
+
+Example to execute query
+ResultSet rs=stmt.executeQuery("select * from emp");  
+  
+while(rs.next()){  
+System.out.println(rs.getInt(1)+" "+rs.getString(2));  
+}  
+Close the connection object
+By closing connection object statement and ResultSet will be closed automatically. The close() method of Connection interface is used to close the connection.
+
+Syntax of close() method
+public void close()throws SQLException
+Example to close connection
+con.close();  
+
+Java Database Connectivity with MySQL
+
+
+Driver class: The driver class for the mysql database is com.mysql.jdbc.Driver.
+Connection URL: The connection URL for the mysql database is jdbc:mysql://localhost:3306/sonoo where jdbc is the API, mysql is the database, localhost is the server name on which mysql is running, we may also use IP address, 3306 is the port number and sonoo is the database name. We may use any database, in such case, we need to replace the sonoo with our database name.
+Username: The default username for the mysql database is root.
+Password: It is the password given by the user at the time of installing the mysql database. 
+
+
+create database sonoo;  
+use sonoo;  
+create table emp(id int(10),name varchar(40),age int(3)); 
+Example to Connect Java Application with mysql database
+
+import java.sql.*;  
+class MysqlCon{  
+public static void main(String args[]){  
+try{  
+Class.forName("com.mysql.jdbc.Driver");  
+Connection con=DriverManager.getConnection(  
+"jdbc:mysql://localhost:3306/sonoo","root","root");  
+//here sonoo is database name, root is username and password  
+Statement stmt=con.createStatement();  
+ResultSet rs=stmt.executeQuery("select * from emp");  
+while(rs.next())  
+System.out.println(rs.getInt(1)+"  "+rs.getString(2)+"  "+rs.getString(3));  
+con.close();  
+}catch(Exception e){ System.out.println(e);}  
+}  
+} 
+Above code will fetch all the records of emp table.
+To connect java application with the mysql database, mysqlconnector.jar file is required to be loaded.
+
+
+Two ways to load the jar file:
+
+
+Paste the mysqlconnector.jar file in jre/lib/ext folder
+
+Download the mysqlconnector.jar file. Go to jre/lib/ext folder and paste the jar file here.
+Set classpath:
+
+Temporary Classpath
+open command prompt and write:
+
+
+
+C:>set classpath=c:\folder\mysql-connector-java-5.0.8-bin.jar;.;  
+Permanent Classpath
+Go to environment variable then click on new tab. In variable name write classpath and in variable value paste the path to the mysqlconnector.jar file by appending mysqlconnector.jar;.; as C:\folder\mysql-connector-java-5.0.8-bin.jar;.;
+
+
+CONCLUSION: 
+
+Creating a Java JDBC Connection Inspired by original ODBC (Open Database Connectivity), the JDBC stands for Java Database Connectivity. JDBC is a Java database API that was created as an industry standard for making connections between Java applications and other databases
