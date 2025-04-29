@@ -1,0 +1,182 @@
+
+DDL commands: 
+✴ CREATE 
+✴ ALTER 
+✴ DROP 
+✴ RENAME 
+✴ TRUNCATE
+
+
+CREATE TABLE: 
+To make a new database, table, index, or stored query. A create statement in SQL creates an object inside of a relational database management system (RDBMS). 
+
+CREATE TABLE <table_name> ( 
+Column_name1 data_type ([size]), Column_name2 data_type ([size]), 
+. 
+. 
+. 
+Column_name-n data_type ([size]) 
+);
+
+
+ALTER A TABLE: 
+
+To modify an existing database object. Alter the structure of the database. 
+To add a column in a table 
+
+ALTER TABLE table_name ADD column_name datatype; 
+
+To delete a column in a table 
+
+ALTER TABLE table_name DROP column column_name; 
+
+DROP TABLE: 
+Delete Objects from the Database 
+
+DROP TABLE table_name; 
+
+TRUNCATE TABLE: 
+Remove all records from a table, including all spaces allocated for the records are removed. 
+
+
+TRUNCATE TABLE table_name;
+
+EXERCISE: 
+
+
+CREATE TABLE 
+
+SQL> create table employee 
+2 ( 
+3 empid varchar(10) primary key, 
+4 empname varchar2(20) not null, 
+5 gender varchar2(7) not null, 
+6 age number(3) not null,
+7 dept varchar2(15) not null, 
+8 dob date not null, 
+9 doj date not null 
+10); 
+Table created.
+
+
+SQL> create table salary
+2 ( 
+3 empid varchar(10) references employee(empid), 
+4 salary number(10) not null, 
+5 dept varchar(15) not null, 
+6 branch varchar2(20) not null 
+7 ); 
+Table created.
+
+
+SQL> create table branchtable 
+2 ( 
+3 branch varchar2(20) not null,
+4 city varchar2(20) not null 
+5 );
+ 
+Table created
+
+
+DESCRIBE TABLE
+
+SQL> desc employee; 
+
+
+
+
+
+
+
+
+
+
+ALTER TABLE 
+
+ADD
+
+SQL> alter table employee add(designation varchar2(15)); 
+
+Table altered. 
+
+SQL> alter table salary add(constraint nithi unique(empid));
+
+Table altered.
+
+MODIFY
+
+SQL> alter table employee modify (designation varchar2(20));
+
+Table altered
+
+RENAME TABLE
+
+SQL> rename employee to emp; 
+
+Table renamed. 
+
+SQL> desc employee; 
+
+ERROR: 
+
+ORA-04043: object employee does not exist 
+
+Table altered. 
+
+
+TRUNCATE TABLE DATA
+
+SQL> insert into emp values(&no,'&name','&dept',&age,'&sex'); 
+Enter value for no: 1 
+Enter value for name: arun 
+Enter value for dept: it 
+Enter value for age: 22 
+Enter value for sex: m 
+1 row created. 
+
+SQL> insert into emp values(&no,'&name','&dept',&age,'&sex'); 
+Enter value for no: 2 
+Enter value for name: bala 
+Enter value for dept: service 
+Enter value for age: 26 
+Enter value for sex: m 
+1 row created. 
+
+SQL> insert into emp values(&no,'&name','&dept',&age,'&sex'); 
+Enter value for no: 3 
+Enter value for name: chitra 
+Enter value for dept: sales 
+Enter value for age: 25 
+Enter value for sex: f 
+1 row created. 
+
+
+
+SQL> commit;
+
+Commit complete. 
+
+SQL> truncate table emp; 
+
+Table truncated. 
+
+
+SQL> select * from emp; 
+no rows selected
+
+SQL> commit; 
+
+Commit complete. 
+
+
+DROP TABLE 
+
+SQL> drop table emp; 
+
+Table dropped. 
+
+
+SQL> desc emp; 
+
+ERROR: 
+ORA-04043: object emp does not exist 
